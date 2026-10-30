@@ -26,6 +26,15 @@ A reporting layer of four PostgreSQL views showing cancelled and unavailable ord
 - Cancelled orders stop at different stages: 141 before approval, 409 after approval but before shipping, 69 in transit, 6 after delivery (possible returns).
 - Example flag: in the week of 20 Aug 2018, one SP seller had **5 unusual orders in 4 weeks**. The next highest sellers had 2.
 
+## Power BI page
+
+`powerbi/Risk_Unusual_Orders.pbix`: one page built on the four views (Import mode).
+
+- **Model:** a `Week` table (one row per Monday, built with `GENERATESERIES`) related one-to-many to all four views. One week slicer filters everything. Auto date/time is off.
+- **Measures:** `Unusual Orders`, `All Orders`, `Unusual Rate %` (`DIVIDE`), `WoW Change` (`CALCULATE` on the previous week; blank for the first week), `Unusual Orders (by status)` (`DISTINCTCOUNT`). `WoW Change` matches the SQL `wow_change` column.
+- **Page:** KPI cards and region bars follow the selected week. The status chart shows all weeks (slicer interaction turned off). The seller table lists sellers with 2+ unusual orders in the last 4 weeks, with no totals row, because rolling counts must not be summed.
+- **Refresh:** after rerunning the SQL files, open the .pbix → **Refresh**. If the date window changes, update the `GENERATESERIES` dates in the `Week` table.
+
 ## Data source
 
 Olist Brazilian e-commerce public dataset, loaded into PostgreSQL schema `raw`. Tables used: `orders`, `order_items`, `sellers`, `customers`, `order_payments`.
@@ -70,4 +79,4 @@ When new data arrives:
 
 - **Customer-region view.** The definitions describe one. It would cover all 1,168 orders, including the Unattributed 62%.
 - **Cancellation stage** as a column in view 1, so Risk can see *where* orders fail, not just how many.
-- A **Power BI page** on top of these views (Module 2).
+- **Publish** the Power BI page to the Power BI service, with row-level security if regional teams should see only their own states.

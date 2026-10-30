@@ -23,6 +23,10 @@ In the 4 weeks to 26 Aug 2018, seller `81783131…` (São Paulo) had **5 unusual
 São Paulo sellers account for 73% of the unusual orders that can be traced to a seller, but they also handle 71% of all orders. Their share matches their size.
 → **Action:** none needed. Keep monitoring regions in the weekly report.
 
+**4. The type of problem has changed.**
+Until January 2018, most unusual orders were *unavailable* (paid but never supplied). Since then, most have been *cancellations*, and cancellations rose sharply in July–August 2018.
+→ **Action:** find out what changed in early 2018 (stock process, seller rules, payment checks), and watch whether the July–August rise holds once those weeks are final.
+
 ## What not to rely on yet
 
 - **Refunds aren't recorded.** The data shows what customers paid on these orders, but not whether the money was returned. Finding 1 can't be closed until refund records are checked.
